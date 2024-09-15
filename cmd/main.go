@@ -29,7 +29,7 @@ func run() error {
         return nil
     }
 
-    client := CreateClient(cfg)
+    client := digitalocean.CreateClient(config)
 
     fmt.Println("Client returned from func: ", client)
 
