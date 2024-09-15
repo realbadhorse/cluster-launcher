@@ -23,17 +23,12 @@ func run() error {
         APIToken: os.Getenv("DO_API_TOKEN"),
     }
 
-    fmt.Println("API Token: ", config.APIToken)
-
     if config.APIToken == "" {
         fmt.Println("env var DO_API_TOKEN is empty")
         return nil
     }
 
     client := digitalocean.CreateClient(config)
-
-    fmt.Println("Client returned from func: ", client)
-    fmt.Println()
 
     ctx := context.Background()
 
