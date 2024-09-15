@@ -22,6 +22,11 @@ func run() error {
         APIToken: os.Getenv("DO_API_TOKEN"),
     }
 
+    if config.APIToken == "" {
+        fmt.Println("env var DO_API_TOKEN is empty")
+        return nil
+    }
+
     client := CreateClient(cfg)
 
     fmt.Println("Client returned from func: ", client)
