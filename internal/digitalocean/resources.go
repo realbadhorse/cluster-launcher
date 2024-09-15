@@ -5,7 +5,6 @@ import (
     "context"
     "log"
 
-
     "github.com/digitalocean/godo"
 )
 
