@@ -6,6 +6,6 @@ import (
 )
 
 func CreateClient(config config.Config) *godo.Client {
-    client := godo.NewFromToken(cfg.APIToken)
+    client := godo.NewFromToken(config.APIToken)
     return client
 }
