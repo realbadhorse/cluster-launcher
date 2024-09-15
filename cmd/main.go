@@ -33,8 +33,5 @@ func run() error {
 
     fmt.Println("Client returned from func: ", client)
 
-    if err := func(); err != nil {
-        return fmt.Errorf("Error running func called from run(): %w", err)
-    } 
     return nil
 }
