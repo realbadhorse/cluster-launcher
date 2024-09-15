@@ -4,8 +4,8 @@ import (
     "fmt"
     "os"
 
-    "github.com/realbadhorse/cluster-launcher/config"
-    "github.com/realbadhorse/cluster-launcher/digitalocean"
+    "github.com/realbadhorse/cluster-launcher/internal/config"
+    "github.com/realbadhorse/cluster-launcher/internal/digitalocean"
 )
 
 func main() {
