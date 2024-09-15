@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "os"
+    "context"
 
     "github.com/realbadhorse/cluster-launcher/internal/config"
     "github.com/realbadhorse/cluster-launcher/internal/digitalocean"
@@ -32,6 +33,11 @@ func run() error {
     client := digitalocean.CreateClient(config)
 
     fmt.Println("Client returned from func: ", client)
+    fmt.Println()
+
+    ctx := context.Background()
+
+    digitalocean.ListProjects(ctx, client)
 
     return nil
 }
