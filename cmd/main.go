@@ -21,7 +21,7 @@ func run() error {
     apiToken := os.Getenv("DO_API_TOKEN") 
 
     if apiToken == "" {
-        fmt.Println("env var DO_API_TOKEN is empty")
+        log.Printf("error: env var DO_API_TOKEN is empty")
         return nil
     }
 
