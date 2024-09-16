@@ -34,5 +34,7 @@ func run() error {
 
     digitalocean.ListProjects(ctx, client)
 
+    digitalocean.ListDroplets(ctx, client)
+
     return nil
 }
