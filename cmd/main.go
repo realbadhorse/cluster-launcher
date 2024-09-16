@@ -4,6 +4,7 @@ import (
     "fmt"
     "os"
     "context"
+    "log"
 
     "github.com/realbadhorse/cluster-launcher/internal/digitalocean"
 )
