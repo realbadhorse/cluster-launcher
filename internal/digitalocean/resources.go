@@ -60,12 +60,11 @@ func ListDroplets(ctx context.Context, client *godo.Client) {
             break
         }
         
-        opt.page++
+        opt.Page++
 
     }
 
-    for i := 0; i < len(allDroplets); i++ {
-        droplet := allDroplets[i]
+    for _, droplet := range allDroplets {
         fmt.Printf("- ID: %s, Name: %s\n", droplet.ID, droplet.Name)
     }
 }
