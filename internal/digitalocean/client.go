@@ -5,7 +5,9 @@ import (
     "github.com/realbadhorse/cluster-launcher/internal/config"
 )
 
-func CreateClient(config config.Config) *godo.Client {
-    client := godo.NewFromToken(config.APIToken)
+type Token string
+
+func CreateClient(token string) *godo.Client {
+    client := godo.NewFromToken(token)
     return client
 }

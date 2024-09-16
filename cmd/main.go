@@ -19,16 +19,14 @@ func main() {
 }
 
 func run() error {
-    config := config.Config{
-        APIToken: os.Getenv("DO_API_TOKEN"),
-    }
+    apiToken := os.Getenv("DO_API_TOKEN") 
 
-    if config.APIToken == "" {
+    if apiToken == "" {
         fmt.Println("env var DO_API_TOKEN is empty")
         return nil
     }
 
-    client := digitalocean.CreateClient(config)
+    client := digitalocean.CreateClient(apiToken)
 
     ctx := context.Background()
 
