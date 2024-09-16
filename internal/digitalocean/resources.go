@@ -155,3 +155,58 @@ func ListVolumes(ctx context.Context, client *godo.Client) {
     }
     fmt.Println()
 }
+
+func ListFirewalls(ctx context.Context, client *godo.Client) {
+    
+    var allFirewalls []godo.Firewall
+
+    fmt.Println("Firewalls: ")
+    opt := &godo.ListOptions{Page: 1, PerPage: 200}
+    for {
+        firewalls, resp, err := client.Firewalls.List(ctx, opt)
+        if err != nil {
+            log.Printf("error fetching firewalls: ", err)
+        }
+        
+        allFirewalls = append(allFirewalls, firewalls...)
+
+        if resp.Links == nil || resp.Links.IsLastPage() {
+            break
+        }
+
+        opt.Page++
+    }
+
+    for _, firewall := range allFirewalls {
+        fmt.Printf("- ID: %s, Name: %s, Droplet IDs: %d", firewall.ID, firewall.Name, firewall.DropletIDs)
+    }
+    fmt.Println()
+}
+
+func ListImages(ctx context.Context, client *godo.Client) {
+    
+    var allImages []godo.Image
+    tag := "Custom"
+
+    fmt.Println("Images: ")
+    opt := &godo.ListOptions{Page: 1, PerPage: 200}
+    for {
+        images, resp, err := client.Images.ListByTag(ctx, tag, opt)
+        if err != nil {
+            log.Printf("error fetching images: ", err)
+        }
+
+        allImages = append(allImages, images...)
+
+        if resp.Links == nil || resp.Links.IsLastPage() {
+            break
+        }
+
+        opt.Page++
+    }
+
+    for _, image := range allImages {
+        fmt.Printf("- ID: %d, Name: %s, Regions: %s", image.ID, image.Name, image.Regions)
+    }
+    fmt.Println()
+}

@@ -42,5 +42,9 @@ func run() error {
 
     digitalocean.ListVolumes(ctx, client)
 
+    digitalocean.ListFirewalls(ctx, client)
+
+    digitalocean.ListImages(ctx, client)
+
     return nil
 }
