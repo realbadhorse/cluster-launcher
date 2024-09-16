@@ -8,6 +8,10 @@ import (
     "github.com/digitalocean/godo"
 )
 
+type Droplets struct {
+    
+}
+
 // func GetResources() {
 //    
 //}
@@ -35,4 +39,33 @@ func ListProjects(ctx context.Context, client *godo.Client) {
         opt.Page = page + 1
     }
     fmt.Println()
+}
+
+func ListDroplets(ctx context.Context, client *godo.Client) {
+    
+    var allDroplets []godo.Droplet
+
+    fmt.Println("Droplets:")
+    opt := &godo.ListOptions{Page: 1, PerPage: 200}
+    for {
+        droplets, resp, err := client.Droplets.List(ctx, opt)
+        if err != nil {
+            log.Printf("error fetching droplets: ", err)
+            return
+        }
+       
+        allDroplets = append(allDroplets, droplets...)
+
+        if resp.Links == nil || resp.Links.IsLastPage() {
+            break
+        }
+        
+        opt.page++
+
+    }
+
+    for i := 0; i < len(allDroplets); i++ {
+        droplet := allDroplets[i]
+        fmt.Printf("- ID: %s, Name: %s\n", droplet.ID, droplet.Name)
+    }
 }

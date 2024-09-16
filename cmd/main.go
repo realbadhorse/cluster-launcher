@@ -30,6 +30,8 @@ func run() error {
 
     ctx := context.Background()
 
+    // This is currently calling a list of functions for testing, but these will all be wrapped up into digitalocean.GetResources() eventually.
+
     digitalocean.ListProjects(ctx, client)
 
     return nil
