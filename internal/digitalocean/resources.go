@@ -65,6 +65,93 @@ func ListDroplets(ctx context.Context, client *godo.Client) {
     }
 
     for _, droplet := range allDroplets {
-        fmt.Printf("- ID: %s, Name: %s\n", droplet.ID, droplet.Name)
+        fmt.Printf("- ID: %d, Name: %s, Size: %s, Image: %s, Tags: %s, VPC UUID: %s\n", droplet.ID, droplet.Name, droplet.SizeSlug, droplet.Image.Name, droplet.Tags[0], droplet.VPCUUID)
     }
+    fmt.Println()
+}
+
+func ListVPCs(ctx context.Context, client *godo.Client) {
+    
+    var allVPCs []*godo.VPC
+
+    fmt.Println("VPCs:")
+    opt := &godo.ListOptions{Page: 1, PerPage: 200}
+    for {
+        vpcs, resp, err := client.VPCs.List(ctx, opt)
+        if err != nil {
+            log.Printf("error fetching VPCs: ", err)
+        }
+
+        allVPCs = append(allVPCs, vpcs...)
+
+        if resp.Links == nil || resp.Links.IsLastPage() {
+            break
+        }
+
+        opt.Page++
+    }
+
+    for _, vpc := range allVPCs {
+        fmt.Printf("- ID: %s, Name: %s, IP Range: %s\n", vpc.ID, vpc.Name, vpc.IPRange)
+    }
+    fmt.Println()
+}
+
+func ListLBs(ctx context.Context, client *godo.Client) {
+
+    var allLBs []godo.LoadBalancer
+
+    fmt.Println("LoadBalancers: ")
+    opt := &godo.ListOptions{Page: 1, PerPage: 200}
+    for {
+        lbs, resp, err := client.LoadBalancers.List(ctx, opt)
+        if err != nil {
+            log.Printf("error fetching loadbalancers: ", err)
+        }
+
+        allLBs = append(allLBs, lbs...)
+
+        if resp.Links == nil || resp.Links.IsLastPage() {
+            break
+        }
+
+        opt.Page++
+    }
+
+    for _, lb := range allLBs {
+        fmt.Printf("- ID: %s, Name: %s, IP address: %s\n", lb.ID, lb.Name, lb.IP)
+    }
+    fmt.Println()
+}
+
+func ListVolumes(ctx context.Context, client *godo.Client) {
+    
+    var allVolumes []godo.Volume
+
+    fmt.Println("Volumes: ")
+    opt := &godo.ListOptions{Page: 1, PerPage: 200}
+    params := &godo.ListVolumeParams{
+        Region:         "",
+        Name:           "",       
+        ListOptions:    opt,
+    }
+    for {
+        volumes, resp, err := client.Storage.ListVolumes(ctx, params)
+        if err != nil {
+            log.Printf("error fetching volumes: ", err)
+        }
+
+        allVolumes = append(allVolumes, volumes...)
+
+        if resp.Links == nil || resp.Links.IsLastPage() {
+            break
+        }
+
+        opt.Page++
+    }
+
+    for _, volume := range allVolumes {
+        fmt.Printf("- ID: %s, Name: %s, Droplet ID: %d", volume.ID, volume.Name, volume.DropletIDs[0])
+    }
+    fmt.Println()
 }

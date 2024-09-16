@@ -36,5 +36,11 @@ func run() error {
 
     digitalocean.ListDroplets(ctx, client)
 
+    digitalocean.ListVPCs(ctx, client)
+
+    digitalocean.ListLBs(ctx, client)
+
+    digitalocean.ListVolumes(ctx, client)
+
     return nil
 }
