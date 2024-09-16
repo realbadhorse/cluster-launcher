@@ -5,7 +5,6 @@ import (
     "os"
     "context"
 
-    "github.com/realbadhorse/cluster-launcher/internal/config"
     "github.com/realbadhorse/cluster-launcher/internal/digitalocean"
 )
 
