@@ -151,7 +151,7 @@ func ListVolumes(ctx context.Context, client *godo.Client) {
     }
 
     for _, volume := range allVolumes {
-        fmt.Printf("- ID: %s, Name: %s, Droplet ID: %d", volume.ID, volume.Name, volume.DropletIDs[0])
+        fmt.Printf("- ID: %s, Name: %s, Droplet ID: %d\n", volume.ID, volume.Name, volume.DropletIDs[0])
     }
     fmt.Println()
 }
@@ -178,7 +178,7 @@ func ListFirewalls(ctx context.Context, client *godo.Client) {
     }
 
     for _, firewall := range allFirewalls {
-        fmt.Printf("- ID: %s, Name: %s, Droplet IDs: %d", firewall.ID, firewall.Name, firewall.DropletIDs)
+        fmt.Printf("- ID: %s, Name: %s, Droplet IDs: %d\n", firewall.ID, firewall.Name, firewall.DropletIDs)
     }
     fmt.Println()
 }
@@ -206,7 +206,7 @@ func ListImages(ctx context.Context, client *godo.Client) {
     }
 
     for _, image := range allImages {
-        fmt.Printf("- ID: %d, Name: %s, Regions: %s", image.ID, image.Name, image.Regions)
+        fmt.Printf("- ID: %d, Name: %s, Regions: %s\n", image.ID, image.Name, image.Regions)
     }
     fmt.Println()
 }
